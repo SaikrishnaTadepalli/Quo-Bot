@@ -24,7 +24,7 @@ T.get('search/tweets', params, gotData);
 */
 
 // Post a tweet
-function createTextTweet(tweet) {
+function createTweet(tweet) {
     var myUpdate = {
         status: tweet
     }
@@ -41,7 +41,6 @@ function createTextTweet(tweet) {
     T.post('statuses/update', myUpdate, tweeted);
 }
 
-intervalInMins = 60 * 12;
 
 function GetQuoteText() {
     var r = Math.floor(Math.random() * 100);
@@ -49,5 +48,9 @@ function GetQuoteText() {
     return('here is a random number ' + r + '.')
 }
 
-setInterval(createTextTweet(), 1000 * 60 * intervalInMins);
+intervalInMins = 1
+
+createTweet(GetQuoteText())
+
+setInterval(createTweet, 1000 * 60 * intervalInMins);
 
