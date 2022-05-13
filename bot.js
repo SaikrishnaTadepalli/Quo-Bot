@@ -4,6 +4,7 @@ var Twit = require('twit');
 
 var config = require('./config');
 var T = new Twit(config);
+var quoteApi = require('./quote')
 
 
 // Get tweets based on a query
@@ -25,27 +26,28 @@ T.get('search/tweets', params, gotData);
 
 // Post a tweet
 function createTweet(tweet) {
-    var myUpdate = {
-        status: tweet
+  var myUpdate = {
+    status: tweet
+  }
+
+  function tweeted(err, data, response) {
+    if (err) {
+      console.log('Something Went Wrong!')
+      console.log(err)
+    } else {
+      console.log('Worked!')
     }
-    
-    function tweeted(err, data, response) {
-        if (err) {
-            console.log('Something Went Wrong!')
-            console.log(err)
-        } else {
-            console.log('Worked!')
-        }
-    }
-    
-    T.post('statuses/update', myUpdate, tweeted);
+  }
+
+  T.post('statuses/update', myUpdate, tweeted);
 }
 
 
-function GetQuoteText() {
-    var r = Math.floor(Math.random() * 100);
-
-    return('here is a random number ' + r + '.')
+async function GetQuoteText() {
+  const quotes = await quoteApi.getQuotes();
+  const quoteArrayLen = quotes.length - 1;
+  const ind = Math.floor(Math.random() * quoteArrayLen);
+  return quotes[ind];
 }
 
 intervalInMins = 1
