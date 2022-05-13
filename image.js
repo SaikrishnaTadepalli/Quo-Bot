@@ -1,27 +1,42 @@
-function DrawImage(text, path, textColor, backColor) {
-  const fs = require('fs')
-  const { createCanvas, loadImage } = require('canvas')
+const fs = require('fs')
+const { createCanvas } = require('canvas');
 
-  const width = 1600
-  const height = 900
+// basic settings
+const width = 1600;
+const height = 900;
 
-  const canvas = createCanvas(width, height)
-  const context = canvas.getContext('2d')
+const textColor = '#CFD8DC';
+const backColor = '#607D8B';
 
-  context.fillStyle = backColor
-  context.fillRect(0, 0, width, height)
+const destination = './image.png'; //p
 
-  context.font = 'bold 80pt Menlo'
-  context.textAlign = 'center'
-  context.textBaseline = 'top'
+const canvas = createCanvas(width, height); 
+const context = canvas.getContext('2d');
 
-  const textWidth = context.measureText(text).width
-  context.fillRect(height - textWidth / 2, height / 2, textWidth, 400)
-  context.fillStyle = textColor
-  context.fillText(text, 800, 400)
+//p
+//p
+const quote = 'Hello darkness my old friend. I\'ve come to talk with you again.';
+const author = '-Sa Ad';
 
-  const buffer = canvas.toBuffer('image/png')
-  fs.writeFileSync(path, buffer)
-}
+// filling the window
 
-DrawImage("Hello, World!", './test.png', '#CFD8DC', '#607D8B')
+context.fillStyle = '#607D8B';
+context.fillRect(0, 0, width, height);
+
+// quote text
+
+context.font = 'bold 70pt Menlo';
+context.textAlign = 'center';
+context.fillStyle = '#CFD8DC';
+context.fillText(quote, width / 2, height / 2)
+
+// author text
+
+context.fillStyle = '#fff'
+context.font = 'bold 30pt Menlo'
+context.fillText(author, width / 2, (height  * 2 ) / 3 )
+
+
+// saving
+const buffer = canvas.toBuffer('image/png')
+fs.writeFileSync(destination, buffer)
