@@ -1,11 +1,7 @@
-console.log('Hello, World!')
-
 var Twit = require('twit');
-
 var config = require('./config');
-var T = new Twit(config);
-var quoteApi = require('../../quote')
 
+var T = new Twit(config);
 
 // Get tweets based on a query
 /*
@@ -25,9 +21,9 @@ T.get('search/tweets', params, gotData);
 */
 
 // Post a tweet
-function createTweet(tweet) {
+function PostText(text) {
   var myUpdate = {
-    status: tweet
+    status: text
   }
 
   function tweeted(err, data, response) {
@@ -43,16 +39,4 @@ function createTweet(tweet) {
 }
 
 
-async function GetQuoteText() {
-  const quotes = await quoteApi.getQuotes();
-  const quoteArrayLen = quotes.length - 1;
-  const ind = Math.floor(Math.random() * quoteArrayLen);
-  return quotes[ind];
-}
-
-intervalInMins = 1
-
-createTweet(GetQuoteText())
-
-setInterval(createTweet, 1000 * 60 * intervalInMins);
-
+module.exports = { PostText }
