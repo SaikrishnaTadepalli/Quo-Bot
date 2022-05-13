@@ -4,7 +4,7 @@ var Twit = require('twit');
 
 var config = require('./config');
 var T = new Twit(config);
-var quoteApi = require('./quote')
+var quoteApi = require('../../quote')
 
 
 // Get tweets based on a query
