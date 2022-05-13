@@ -16,7 +16,7 @@ function DrawImage(text, path, textColor, backColor) {
     context.textBaseline = 'top'
 
     const textWidth = context.measureText(text).width
-    context.fillRect(height - textWidth / 2 - 10, height / 2, textWidth, 400)
+    context.fillRect(height - textWidth / 2, height / 2, textWidth, 400)
     context.fillStyle = textColor
     context.fillText(text, 800, 400)
 
@@ -24,4 +24,4 @@ function DrawImage(text, path, textColor, backColor) {
     fs.writeFileSync(path, buffer)
 }
 
-DrawImage("I love you baby", './test.png', '#F00', '#039')
+DrawImage("Hello, World!", './test.png', '#CFD8DC', '#607D8B')
