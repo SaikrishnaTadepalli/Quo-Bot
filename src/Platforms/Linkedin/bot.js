@@ -1,7 +1,8 @@
 var config = require('./config');
 
-function PostText(quote) {
-    console.log('Post Quote: ' + quote)
+function PostText(quote, author) {
+  console.log('Post Quote: ' + quote);
+  console.log('Author of quote: ' + author);
 }
 
 module.exports = { PostText }

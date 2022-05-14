@@ -21,9 +21,10 @@ T.get('search/tweets', params, gotData);
 */
 
 // Post a tweet
-function PostText(text) {
+function PostText(quote, author) {
+  console.log('Author of quote: ' + author);
   var myUpdate = {
-    status: text
+    status: quote
   }
 
   function tweeted(err, data, response) {
