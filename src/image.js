@@ -3,7 +3,6 @@ const { createCanvas } = require('canvas');
 const CanvasTextWrapper = require('canvas-text-wrapper').CanvasTextWrapper;
 
 function getImage(quote, author, destination) {
-
   // basic settings
   const width = 1600;
   const height = 900;
@@ -21,21 +20,21 @@ function getImage(quote, author, destination) {
 
   // quote 
   CanvasTextWrapper(canvas, quote,
-    {
-      lineBreak: 'auto',
-      font: '60px Arial',
-      verticalAlign: 'middle',
-      textAlign: 'center',
-      paddingX: 100
-    });
+  {
+    lineBreak: 'auto',
+    font: '60px Arial',
+    verticalAlign: 'middle',
+    textAlign: 'center',
+    paddingX: 100
+  });
 
     // author
   CanvasTextWrapper(canvas, '- ' + author,
-    {
-      font: '60px Arial',
-      textAlign: 'center',
-      paddingY: 600
-    });
+  {
+    font: '60px Arial',
+    textAlign: 'center',
+    paddingY: 600
+  });
 
   // saving
   const buffer = canvas.toBuffer('image/png')
