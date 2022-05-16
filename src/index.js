@@ -29,6 +29,6 @@ async function PostQuote() {
 }
 
 min = 1000 * 60;
-intervalInMins = 0.1;
+intervalInMins = 60;
 
 setInterval(PostQuote, min *  intervalInMins);
