@@ -1,5 +1,6 @@
 var Twit = require('twit');
 var config = require('./config');
+var fs = require('fs');
 
 var T = new Twit(config);
 
@@ -39,5 +40,35 @@ function PostText(quote, author) {
   T.post('statuses/update', myUpdate, tweeted);
 }
 
+function PostImage(imagePath) {
+  params = {
+    encoding: 'base64'
+  }
 
-module.exports = { PostText }
+  var b64content = fs.readFileSync(imagePath, params);
+
+  function uploaded(err, data, response) {
+    var id = data.media_id_string;
+
+    var tweet = {
+      status: '',
+      media_ids: [id]
+    }
+
+    function tweeted(err, data, response) {
+      if (err) {
+        console.log('Something Went Wrong!')
+        console.log(err)
+      } else {
+        console.log('Worked!')
+      }
+    }
+
+    T.post('statuses/update', tweet, tweeted);
+  }
+
+  T.post('media/upload', {media_data: b64content}, uploaded);
+}
+
+
+module.exports = { PostText, PostImage }

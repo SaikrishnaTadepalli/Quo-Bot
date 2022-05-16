@@ -1,5 +1,6 @@
 var quoteApi = require('./quote');
 var imageGenerator = require('./image');
+var fs = require('fs');
 
 var instagramBot = require('./Platforms/Instagram/bot');
 var linkedinBot = require('./Platforms/Linkedin/bot');
@@ -13,18 +14,21 @@ async function PostQuote() {
   const quote = quotes[ind].quote;
   const author = quotes[ind].author;
   
-  const imagePath = './Resources/image.png'
+  const imagePath = './Resources/image.png';
 
   // Generate Image
   imageGenerator.getImage(quote, author, imagePath);
 
   // Post Quote
-  instagramBot.PostImage(imagePath);
-  linkedinBot.PostText(quote, author);
-  twitterBot.PostText(quote, author);
+  //instagramBot.PostImage(imagePath);
+  //linkedinBot.PostText(quote, author);
+  //twitterBot.PostText(quote, author);
+  twitterBot.PostImage(imagePath);
 
   console.log('Posted')
 }
 
+min = 1000 * 60;
 intervalInMins = 0.1;
-setInterval(PostQuote, 1000 * 60 *  intervalInMins);
+
+setInterval(PostQuote, min *  intervalInMins);
