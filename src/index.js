@@ -20,9 +20,9 @@ async function PostQuote() {
   imageGenerator.getImage(quote, author, imagePath);
 
   // Post Quote
-  //instagramBot.PostImage(imagePath);
-  //linkedinBot.PostText(quote, author);
-  //twitterBot.PostText(quote, author);
+  instagramBot.PostImage(imagePath);
+  linkedinBot.PostText(quote, author);
+  twitterBot.PostText(quote, author);
   twitterBot.PostImage(imagePath);
 
   console.log('Posted')
