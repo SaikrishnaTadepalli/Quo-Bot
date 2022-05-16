@@ -1,42 +1,45 @@
 const fs = require('fs')
 const { createCanvas } = require('canvas');
+const CanvasTextWrapper = require('canvas-text-wrapper').CanvasTextWrapper;
 
-// basic settings
-const width = 1600;
-const height = 900;
+function getImage(quote, author, destination) {
 
-const textColor = '#CFD8DC';
-const backColor = '#607D8B';
+  // basic settings
+  const width = 1600;
+  const height = 900;
 
-const destination = './image.png'; //p
+  const textColor = '#CFD8DC';
+  const backColor = '#607D8B';
 
-const canvas = createCanvas(width, height); 
-const context = canvas.getContext('2d');
+  const canvas = createCanvas(width, height);
+  const context = canvas.getContext('2d');
 
-//p
-//p
-const quote = 'Hello darkness my old friend. I\'ve come to talk with you again.';
-const author = '-Sa Ad';
+  // filling the window and choosing text colour 
+  context.fillStyle = backColor;
+  context.fillRect(0, 0, width, height);
+  context.fillStyle = textColor;
 
-// filling the window
+  // quote 
+  CanvasTextWrapper(canvas, quote,
+    {
+      lineBreak: 'auto',
+      font: '60px Arial',
+      verticalAlign: 'middle',
+      textAlign: 'center',
+      paddingX: 100
+    });
 
-context.fillStyle = '#607D8B';
-context.fillRect(0, 0, width, height);
+    // author
+  CanvasTextWrapper(canvas, '- ' + author,
+    {
+      font: '60px Arial',
+      textAlign: 'center',
+      paddingY: 600
+    });
 
-// quote text
+  // saving
+  const buffer = canvas.toBuffer('image/png')
+  fs.writeFileSync(destination, buffer)
+}
 
-context.font = 'bold 70pt Menlo';
-context.textAlign = 'center';
-context.fillStyle = '#CFD8DC';
-context.fillText(quote, width / 2, height / 2)
-
-// author text
-
-context.fillStyle = '#fff'
-context.font = 'bold 30pt Menlo'
-context.fillText(author, width / 2, (height  * 2 ) / 3 )
-
-
-// saving
-const buffer = canvas.toBuffer('image/png')
-fs.writeFileSync(destination, buffer)
+module.exports = { getImage }

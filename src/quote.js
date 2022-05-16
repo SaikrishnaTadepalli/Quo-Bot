@@ -14,7 +14,10 @@ async function getQuotes() {
     })
     .then((responseJSON) => {
       responseJSON.forEach((quote) => {
-        quotes.push(quote.q)
+        quotes.push({
+          quote: quote.q,
+          author: quote.a,
+        })
       })
     })
     .catch((err) => console.log(err));
