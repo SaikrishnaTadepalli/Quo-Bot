@@ -33,7 +33,6 @@ git clone https://github.com/SaikrishnaTadepalli/QuoBot.git
 
 ```
 npm install
-
 ```
 
 - Set up the environment variables: QuoBot uses environment variables to store sensitive information like API keys and access tokens. To set up the environment variables, create a .env file in the root directory of the project and add the following variables:
